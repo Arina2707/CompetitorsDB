@@ -11,7 +11,7 @@ class CompetitorsAdding:
 
     def competitor_iteration(self):
         for index, row in self.df.iterrows():
-            competitor = Competitor()
+            competitor = Competitors()
             competitor.competitor_name = row['Company']
             competitor.url = row['Url1']
             competitor.org_vals = OrgValues(place=row['Country'], shares=row['Public/private'], cb_rank=row['CB'])

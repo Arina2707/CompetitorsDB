@@ -40,7 +40,7 @@ class OrgValues(EmbeddedDocument):
     cb_rank = FloatField()
 
 
-class Competitor(Document):
+class Competitors(Document):
     url = StringField(unique=True, required=True)
     competitor_name = StringField()
     technology = EmbeddedDocumentField(Technology)
