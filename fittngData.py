@@ -40,12 +40,13 @@ class ReviewsAdding:
             compcust = CompetitorsCustomers()
             compcust.url = original_id
             compcust.customers = Customers(mentions_num=row['Mentions'],
-                                          rank=Rank(overall_rank=row[''], reach_rank=row[''], rank_per_million=row['']),
-                                          views=Views(pv_rank=row[''], pv_per_user=row['']))
+                                          rank=Rank(overall_rank=row['aws1'], reach_rank=row['aws2'], rank_per_million=row['aws3']),
+                                          views=Views(pv_rank=row['aws4'], pv_per_user=0.0))
 
             compcust.reviews = []
-            for i in row['Reviews']:
-                compcust.reviews.append(Reviews(text='', tonality=0.0, score=0))
+            compcust.reviews.append(Reviews(text='',
+                                            tonality_score=row['Average positiveness'],
+                                            positive_percent=row['Positiveness']))
 
             compcust.save()
 

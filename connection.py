@@ -1,10 +1,16 @@
 from mongoengine import *
+import yaml
 
 
 class Connection:
     def __init__(self):
-        self.cluster_url = "mongodb+srv://Arina:arina270799@cluster27-pldc3.gcp.mongodb.net/CompetitorsEvaluation" \
-                           "?retryWrites=true&w=1 "
+        credentials_data = self.process_yaml()
+        self.cluster_url = credentials_data["db_cluster_link"]["url"]
+
+    @staticmethod
+    def process_yaml(self):
+        with open("config.yaml") as file:
+            return yaml.safe_load(file)
 
     def connect(self):
         conn = connect("CompetitorsEvaluation", host=self.cluster_url)
