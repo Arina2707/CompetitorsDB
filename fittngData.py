@@ -40,7 +40,6 @@ class ReviewsAdding:
             compcust = CompetitorsCustomers()
             compcust.url = original_id
             compcust.customers = Customers(mentions_num=row['Mentions'],
-                                          subscribers=row['Subscribers'],
                                           rank=Rank(overall_rank=row[''], reach_rank=row[''], rank_per_million=row['']),
                                           views=Views(pv_rank=row[''], pv_per_user=row['']))
 

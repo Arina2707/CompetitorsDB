@@ -2,9 +2,9 @@ from mongoengine import *
 
 
 class Reviews(EmbeddedDocument):
-    text = StringField(required=True)
-    tonality = FloatField(required=True)
-    score = IntField()
+    text = ListField()
+    tonality_score = FloatField(required=True)
+    positive_percent = FloatField(required=True)
 
 
 class Rank(EmbeddedDocument):
@@ -20,7 +20,6 @@ class Views(EmbeddedDocument):
 
 class Customers(EmbeddedDocument):
     mentions_num = IntField(required=True)
-    subscribers = ListField()
     rank = EmbeddedDocumentField(Rank)
     views = EmbeddedDocumentField(Views)
 
