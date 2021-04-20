@@ -2,15 +2,15 @@ from mongoengine import *
 
 
 class Reviews(EmbeddedDocument):
-    text = ListField()
+    text = StringField()
     tonality_score = FloatField(required=True)
     positive_percent = FloatField(required=True)
 
 
 class Rank(EmbeddedDocument):
-    overall_rank = IntField(required=True)
-    reach_rank = IntField(required=True)
-    rank_per_million = IntField(required=True)
+    overall_rank = FloatField(required=True)
+    reach_rank = FloatField(required=True)
+    rank_per_million = FloatField(required=True)
 
 
 class Views(EmbeddedDocument):
@@ -25,6 +25,6 @@ class Customers(EmbeddedDocument):
 
 
 class CompetitorsCustomers(Document):
-    url = ReferenceField('Competitor', dbref=False, reverse_delete_rule=0, required=True)
+    url = ReferenceField('Competitors', dbref=False, required=True, reverse_delete_rule=CASCADE)
     customers = EmbeddedDocumentField(Customers)
     reviews = EmbeddedDocumentListField(Reviews)

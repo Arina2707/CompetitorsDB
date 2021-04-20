@@ -35,16 +35,18 @@ class ReviewsAdding:
 
     def reviews_iteration(self):
         for index, row in self.df.iterrows():
-            original_id = self.collection.find({'url': {'$eq': row['Url1']}})['_id']
-
+            object_id = self.collection.find({'url': row['Url1']}, {"_id": 1})[0]['_id']
             compcust = CompetitorsCustomers()
-            compcust.url = original_id
+            compcust.url = object_id
+            aws1 = row['aws1'] if row['aws1'] != 'None' else -1
+            tweets = 'no text' if pd.isna(row['Tweets']) else row['Tweets']
+
             compcust.customers = Customers(mentions_num=row['Mentions'],
-                                          rank=Rank(overall_rank=row['aws1'], reach_rank=row['aws2'], rank_per_million=row['aws3']),
+                                          rank=Rank(overall_rank=aws1, reach_rank=row['aws2'], rank_per_million=row['aws3']),
                                           views=Views(pv_rank=row['aws4'], pv_per_user=0.0))
 
             compcust.reviews = []
-            compcust.reviews.append(Reviews(text=row['Tweets'],
+            compcust.reviews.append(Reviews(text=tweets,
                                             tonality_score=row['Average positiveness'],
                                             positive_percent=row['Positiveness']))
 
@@ -55,7 +57,7 @@ if __name__ == '__main__':
     # Connecting to database collection
     conn = Connection()
     db_cursor = conn.connect()
-    coll = db_cursor['Competitors']
+    coll = db_cursor['competitors']
 
     # Adding data
     #df = pd.read_excel(r'C:\Users\maxim\OneDrive\Desktop\folder\diplom\data\parsing\final_companies.xlsx')
