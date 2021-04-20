@@ -35,7 +35,7 @@ class ReviewsAdding:
 
     def reviews_iteration(self):
         for index, row in self.df.iterrows():
-            original_id = self.collection.find({'url': {'$eq': row['Url']}})['_id']
+            original_id = self.collection.find({'url': {'$eq': row['Url1']}})['_id']
 
             compcust = CompetitorsCustomers()
             compcust.url = original_id
@@ -44,7 +44,7 @@ class ReviewsAdding:
                                           views=Views(pv_rank=row['aws4'], pv_per_user=0.0))
 
             compcust.reviews = []
-            compcust.reviews.append(Reviews(text='',
+            compcust.reviews.append(Reviews(text=row['Tweets'],
                                             tonality_score=row['Average positiveness'],
                                             positive_percent=row['Positiveness']))
 
@@ -58,11 +58,13 @@ if __name__ == '__main__':
     coll = db_cursor['Competitors']
 
     # Adding data
-    df = pd.read_excel(r'C:\Users\maxim\OneDrive\Desktop\folder\diplom\data\parsing\final_companies.xlsx')
-    obj = CompetitorsAdding(df)
-    obj.competitor_iteration()
-    print('Competitors added!')
+    #df = pd.read_excel(r'C:\Users\maxim\OneDrive\Desktop\folder\diplom\data\parsing\final_companies.xlsx')
+    #obj = CompetitorsAdding(df)
+    #obj.competitor_iteration()
+    #print('Competitors added!')
 
     #Adding text fields
-    df1 = pd.read_excel('')
+    df1 = pd.read_excel(r"C:\Users\maxim\OneDrive\Desktop\folder\diplom\data\parsing\final_companies_with_text.xlsx")
     obj2 = ReviewsAdding(df1, coll)
+    obj2.reviews_iteration()
+    print('Reviews added!')

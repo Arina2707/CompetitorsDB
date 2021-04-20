@@ -8,7 +8,7 @@ class Connection:
         self.cluster_url = credentials_data["db_cluster_link"]["url"]
 
     @staticmethod
-    def process_yaml(self):
+    def process_yaml():
         with open("config.yaml") as file:
             return yaml.safe_load(file)
 
