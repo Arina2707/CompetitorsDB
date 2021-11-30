@@ -1,4 +1,4 @@
-# DataBase MOngoDB Atlas communiication tool for laser market competitors info storaging
+# DataBase MongoDB Atlas communication tool for laser market competitors info storaging
 
 This is the second part of **5-stage project**, connected with scoring the companies in laser industry.
 
